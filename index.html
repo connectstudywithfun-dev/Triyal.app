@@ -152,4 +152,15 @@ function help(){const q=[["What is this app?","A clean reader for NCERT and core
 function sub(){sub2('Go ad-free',`<div class="plan"><h5>Ad-free · Monthly</h5><div class="pr">₹18<small style="font:600 14px Manrope;color:var(--mut)"> / month</small></div><ul><li>No ads while reading</li><li>Cancel anytime</li></ul><button class="btn" style="max-width:none" onclick="toast('Payments are not connected in this trial')">Choose ₹18</button></div>
  <div class="plan best"><h5>Ad-free · Yearly</h5><div class="pr">₹49<small style="font:600 14px Manrope;color:var(--mut)"> / year</small></div><ul><li>No ads while reading</li><li>Best value</li></ul><button class="btn" style="max-width:none" onclick="toast('Payments are not connected in this trial')">Choose ₹49</button></div>`)}
 route();
+  if ('serviceWorker' in navigator) {
+    window.addEventListener('load', () => {
+      navigator.serviceWorker.register('./sw.js')
+        .then((reg) => {
+          console.log('Service Worker registered successfully:', reg.scope);
+        })
+        .catch((err) => {
+          console.log('Service Worker registration failed:', err);
+        });
+    });
+  }
 </script></body></html>
