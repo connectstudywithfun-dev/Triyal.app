@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Study &amp; fun</title>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;800&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#fff;--fg:#0a0a0a;--mut:#6b7280;--line:#ececec;--card:#f6f6f7;--ac:#0a0a0a;--on:#fff;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+:root:not([data-theme="light"]):not([data-theme="dark"]){color-scheme:light dark}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#000;--fg:#fff;--mut:#9ca3af;--line:#222;--card:#141416}}
+:root[data-theme="dark"]{--bg:#000;--fg:#fff;--mut:#9ca3af;--line:#222;--card:#141416}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{height:100%;margin:0;background:var(--bg);color:var(--fg);font-family:Manrope,system-ui,sans-serif}
+button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+.serif{font-family:"Instrument Serif",Georgia,serif}
+#app{max-width:520px;margin:0 auto;height:100%;position:relative;overflow:hidden}
+.page{position:absolute;inset:0;overflow-y:auto;padding:20px 20px 100px;background:var(--bg)}
+.center{display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding-bottom:20px}
+.center h1{font-size:34px;line-height:1.1;margin:18px 0 8px;font-weight:400}
+.foot{position:absolute;bottom:28px;left:0;right:0;text-align:center;font-size:24px;color:var(--mut)}
+.sk{background:linear-gradient(90deg,var(--card),var(--line),var(--card));background-size:200% 100%;animation:sh 1.4s infinite;border-radius:14px}
+@keyframes sh{to{background-position:-200% 0}}
+input.in{width:100%;max-width:320px;height:54px;border:1.5px solid var(--line);background:var(--card);color:var(--fg);border-radius:16px;padding:0 18px;font:600 16px Manrope;outline:none;margin-top:22px}
+input.in:focus{border-color:var(--fg)}
+.btn{background:var(--ac);color:var(--on);height:54px;width:100%;max-width:320px;border-radius:16px;font-weight:800;margin-top:14px}
+.btn:disabled{opacity:.3}
+.chips{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;width:100%;max-width:320px;margin-top:22px}
+.chip{height:56px;border-radius:16px;background:var(--card);font-weight:800;border:1.5px solid transparent}
+.chip.on{background:var(--ac);color:var(--on)}
+.top{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px}
+.top h2{margin:0;font-size:22px;font-weight:800}
+.ib{width:42px;height:42px;border-radius:14px;background:var(--card);display:grid;place-items:center}
+.ib svg,.tab svg{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.row{display:flex;gap:8px}
+.hero{position:relative;border-radius:28px;background:#0a0a0a;color:#fff;height:190px;overflow:hidden}
+.slide{position:absolute;inset:0;padding:26px;display:flex;flex-direction:column;justify-content:flex-end;opacity:0;transition:opacity .6s}
+.slide.on{opacity:1}
+.slide h3{margin:0 0 6px;font-size:30px;font-weight:400;line-height:1.1;max-width:75%}
+.slide p{margin:0;color:#bbb;font-size:14px}
+.slide .cv{position:absolute;right:22px;top:22px;width:70px;height:98px;border-radius:8px;transform:rotate(6deg)}
+.dots{position:absolute;bottom:12px;left:0;right:0;display:flex;justify-content:center;gap:5px}
+.dots i{width:5px;height:5px;border-radius:5px;background:#555;transition:.3s}.dots i.on{width:18px;background:#fff}
+h4{font-size:19px;margin:26px 0 4px;font-weight:800}.sub{color:var(--mut);font-size:14px;margin:0 0 14px}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.bk{background:var(--card);border-radius:22px;padding:12px;text-align:center}
+.cv{border-radius:8px;aspect-ratio:3/4;display:flex;align-items:flex-end;padding:10px;color:#fff;font:400 19px/1 "Instrument Serif",serif;text-align:left;box-shadow:0 6px 16px rgba(0,0,0,.18)}
+.bk .t{font-weight:700;font-size:14px;margin:12px 0 2px}.bk .m{font-size:12px;color:var(--mut)}
+.hs{display:flex;gap:12px;overflow-x:auto;padding-bottom:6px;scrollbar-width:none}.hs .bk{min-width:130px}
+.search{display:flex;align-items:center;gap:10px;background:var(--card);border-radius:16px;height:52px;padding:0 16px;margin-bottom:6px}
+.search input{flex:1;border:0;background:none;outline:none;font:500 16px Manrope;color:var(--fg)}
+.nav{position:absolute;bottom:0;left:0;right:0;background:var(--bg);border-top:1px solid var(--line);display:flex;padding:8px 0 calc(8px + env(safe-area-inset-bottom,0px));z-index:5}
+.tab{flex:1;display:flex;flex-direction:column;align-items:center;gap:3px;font-size:11px;font-weight:600;color:var(--mut)}
+.tab.on{color:var(--fg)}
+.empty{text-align:center;color:var(--mut);padding:80px 20px}
+.list{background:var(--card);border-radius:20px;overflow:hidden;margin-bottom:18px}
+.li{display:flex;justify-content:space-between;align-items:center;width:100%;padding:17px 18px;font-weight:700;text-align:left}
+.li+.li{border-top:1px solid var(--line)}
+.li span{color:var(--mut);font-weight:500}
+.seg{display:flex;background:var(--line);border-radius:14px;padding:4px;margin:6px 0 16px}
+.seg button{flex:1;height:40px;border-radius:11px;font-weight:700;color:var(--mut)}.seg .on{background:var(--bg);color:var(--fg)}
+.sw{display:flex;gap:12px;margin-bottom:8px}.sw i{width:34px;height:34px;border-radius:50%;cursor:pointer;outline-offset:3px}.sw i.on{outline:2px solid var(--fg)}
+.lbl{font-size:13px;font-weight:700;color:var(--mut);margin:20px 0 6px}
+.prof{display:flex;align-items:center;gap:14px;margin-bottom:6px}
+.av{width:62px;height:62px;border-radius:50%;background:var(--ac);color:var(--on);display:grid;place-items:center;font:400 30px "Instrument Serif"}
+.txt p{line-height:1.7;font-size:15px;color:var(--fg);opacity:.85}
+.q{padding:16px 18px}.q+.q{border-top:1px solid var(--line)}.q b{display:block;cursor:pointer}.q div{display:none;margin-top:8px;color:var(--mut);font-size:14px;line-height:1.5}.q.on div{display:block}
+.plan{border:1.5px solid var(--line);border-radius:22px;padding:20px;margin-bottom:14px}.plan.best{border-color:var(--fg)}
+.plan h5{margin:0;font-size:18px}.plan .pr{font:400 38px "Instrument Serif";margin:6px 0}.plan ul{padding-left:18px;color:var(--mut);font-size:14px;line-height:1.8}
+.note{background:var(--card);border-radius:18px;padding:14px 16px;margin-bottom:10px;font-size:14px;line-height:1.5}.note small{display:block;color:var(--mut);margin-top:4px}
+.back{margin-bottom:10px;font-weight:700}
+.toast{position:fixed;bottom:90px;left:50%;transform:translateX(-50%);background:var(--fg);color:var(--bg);padding:10px 18px;border-radius:30px;font-size:13px;font-weight:700;z-index:20}
+.big{font-size:60px;line-height:1;font-weight:400}.logo{width:76px;height:76px;border-radius:24px;background:var(--ac);color:var(--on);display:grid;place-items:center;margin-bottom:22px}.logo svg{width:36px;height:36px}
+.rb{background:linear-gradient(90deg,#4285f4,#a142f4,#ea4335,#fbbc04,#34a853,#4285f4);background-size:250% 100%;-webkit-background-clip:text;background-clip:text;color:transparent;animation:rbm 5s linear infinite}@keyframes rbm{to{background-position:250% 0}}
+.chip{border-radius:18px;height:72px;line-height:1.1}.chip small{opacity:.6;font-weight:600;font-size:11px}
+.cv{flex-direction:column;justify-content:space-between;align-items:stretch;position:relative;overflow:hidden;padding:10px}.cv u{font:800 8px Manrope;letter-spacing:1px;opacity:.7;text-decoration:none}.cv em{position:absolute;right:-4px;top:12px;font:italic 400 64px "Instrument Serif";opacity:.18}.cv span{font-size:16px;line-height:1.05}
+.mini{position:absolute;right:22px;top:22px;width:62px;height:88px;border-radius:8px;transform:rotate(6deg)}
+.bk .t{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.hs .bk{min-width:140px;max-width:140px}.hs{margin-right:-20px;padding-right:20px}
+.fc{height:36px;padding:0 16px;border-radius:12px;background:var(--card);font-weight:700;font-size:14px;white-space:nowrap;border:1px solid var(--line)}.fc.on{background:var(--ac);color:var(--on)}
+.pc{display:flex;align-items:center;gap:16px;background:var(--card);border-radius:24px;padding:20px;margin-bottom:14px}.pc .av{background:linear-gradient(135deg,#4285f4,#a142f4,#ea4335)}.pc .av{color:#fff}
+.ch svg{flex:none}.back{padding:8px 4px}
+</style></head><body><div id="app"></div>
+<script>
+const $=s=>document.querySelector(s);
+const S={get(k,d){try{const v=localStorage.getItem(k);return v===null?d:v}catch(e){return d}},set(k,v){try{localStorage.setItem(k,v)}catch(e){}}};
+let st={f:'All',name:S.get('name',''),cls:S.get('cls',''),theme:S.get('theme','auto'),ac:S.get('ac','#0a0a0a'),tab:'home'};
+const I={home:'<path d="M3 11l9-8 9 8v9a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"/>',explore:'<circle cx="12" cy="12" r="9"/><path d="M15.5 8.5l-2 5-5 2 2-5z"/>',game:'<rect x="2" y="7" width="20" height="11" rx="5"/><path d="M7 10v5M4.5 12.5h5M16 11h.01M18 14h.01"/>',book:'<path d="M5 4h11a3 3 0 0 1 3 3v13H8a3 3 0 0 1-3-3z"/><path d="M5 17a3 3 0 0 1 3-3h11"/>',set:'<circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.8-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.8 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.5-1.1 1.7 1.7 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.8.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.8V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z"/>',bell:'<path d="M18 8a6 6 0 1 0-12 0c0 7-3 9-3 9h18s-3-2-3-9M13.7 21a2 2 0 0 1-3.4 0"/>',crown:'<path d="M3 8l4 4 5-7 5 7 4-4-2 11H5z"/>',search:'<circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/>'};
+const ic=n=>`<svg viewBox="0 0 24 24">${I[n]}</svg>`;
+const L1="Mathematics|Science|History|Geography|Civics|English|Hindi|Sanskrit|Art Education|Health & Physical Education|Urdu|Environmental Studies|Computer Studies|Maths Exemplar|Science Lab Manual|Vocational Skills|Reader|Moral Science".split('|');
+const L3="Accountancy Part I|Accountancy Part II|Business Studies|Economics|Statistics for Economics|Indian Economic Development|Mathematics|Physics|Chemistry|Biology|English Core|Hindi Core|Computer Science|Psychology|Sociology|Political Science|Geography|History".split('|');
+const HI={"Accountancy Part I":"लेखाशास्त्र भाग 1","Accountancy Part II":"लेखाशास्त्र भाग 2","Mathematics":"गणित","Science":"विज्ञान","History":"इतिहास","Geography":"भूगोल","Economics":"अर्थशास्त्र","Physics":"भौतिक विज्ञान","Chemistry":"रसायन विज्ञान","Biology":"जीव विज्ञान","Business Studies":"व्यावसायिक अध्ययन","Political Science":"राजनीति विज्ञान","Civics":"नागरिक शास्त्र","Psychology":"मनोविज्ञान","Sociology":"समाजशास्त्र","Computer Science":"कंप्यूटर विज्ञान"};
+const PAL=["#7f1d1d","#1e3a8a","#14532d","#4c1d95","#9a3412","#0f4c5c","#831843","#374151","#78350f","#1d4ed8","#065f46","#6d28d9"];
+const BOOKS=[];[6,7,8,9,10,11,12].forEach(k=>{(k<9?L1:L3).forEach((t,j)=>['E','H'].forEach(m=>BOOKS.push({id:BOOKS.length,k,m,e:t,t:m==='H'&&HI[t]?HI[t]:t,n:7+((k+j*3)%8),c:PAL[(j+k)%12]})))});
+const cover=b=>`<div class="cv" style="background:linear-gradient(150deg,${b.c},#000c)"><u>NCERT</u><em>${b.k}</em><span>${b.t}</span></div>`;
+const card=b=>`<div class="bk" data-b="${b.id}">${cover(b)}<div class="t">${b.t}</div><div class="m">Class ${b.k} · ${b.m==='H'?'Hindi':'English'} · ${b.n} ch</div></div>`;
+const saved=()=>{try{return JSON.parse(S.get('saved','[]'))}catch(e){return[]}};
+const PDF='<svg viewBox="0 0 24 24" style="width:26px;height:26px;fill:#ea4335;stroke:none"><path d="M6 2h8l6 6v14H6z"/><path d="M14 2v6h6" fill="#f8a79f"/></svg>';
+const ACC=["Introduction to Accounting","Theory Base of Accounting","Recording of Transactions - I","Recording of Transactions - II","Bank Reconciliation Statement","Trial Balance and Rectification of Errors"];
+function bookP(id){const b=BOOKS[id];S.set('last',id);const sv=()=>saved().includes(id);
+ const p=sub2(b.t,`<div style="text-align:center"><div style="width:150px;margin:0 auto 14px">${cover(b)}</div><div style="color:var(--mut);font-size:14px">NCERT Publication · Class ${b.k} · ${b.m==='H'?'Hindi':'English'} Medium</div><button class="btn" id="sv" style="margin:16px auto 0;display:block"></button></div><div class="lbl" style="margin-top:26px">Chapters</div><div class="list">${Array.from({length:b.n},(_,i)=>`<button class="li ch">CH-${i+1}: ${b.e==='Accountancy Part I'&&i<6?ACC[i]:(b.e+' · Chapter '+(i+1))}${PDF}</button>`).join('')}</div>`);
+ const B=p.querySelector('#sv');const u=()=>{B.textContent=sv()?'✓ Saved in My Books':'Save in My Books';B.style.background=sv()?'#059669':'var(--ac)';B.style.color='#fff'};u();
+ B.onclick=()=>{let a=saved();a=sv()?a.filter(x=>x!==id):[...a,id];S.set('saved',JSON.stringify(a));u();if(st.tab==='book')view()};
+ p.querySelectorAll('.ch').forEach(c=>c.onclick=()=>toast('PDF reader coming soon'))}
+const app=$('#app');
+function theme(){const r=document.documentElement;st.theme==='auto'?r.removeAttribute('data-theme'):r.setAttribute('data-theme',st.theme);
+ let a=st.ac;const dark=r.dataset.theme==='dark'||(st.theme==='auto'&&matchMedia('(prefers-color-scheme:dark)').matches);
+ r.style.setProperty('--ac',dark&&a==='#0a0a0a'?'#fff':a);r.style.setProperty('--on',dark&&a==='#0a0a0a'?'#000':'#fff')}
+function toast(t){const e=document.createElement('div');e.className='toast';e.textContent=t;document.body.append(e);setTimeout(()=>e.remove(),1800)}
+let timer;
+function route(){clearInterval(timer);theme();if(!st.name)return nameP();if(!st.cls)return clsP();shell()}
+function nameP(){app.innerHTML=`<div class="page center"><div class="logo">${ic('book')}</div><div class="serif big">Welcome</div><div class="rb serif big" style="font-style:italic">my friend</div><p style="color:var(--mut);margin:14px 0 0;font-size:17px">please enter your name to begin</p>
+<input class="in" id="n" placeholder="Your name" maxlength="24" autocomplete="off"><button class="btn" id="go" disabled>Continue</button><div class="foot serif">I ❤️ learning</div></div>`;
+ const n=$('#n'),g=$('#go');n.oninput=()=>g.disabled=!n.value.trim();
+ const go=()=>{if(!n.value.trim())return;st.name=n.value.trim();S.set('name',st.name);route()};g.onclick=go;n.onkeydown=e=>e.key==='Enter'&&go()}
+function clsP(){app.innerHTML=`<div class="page center"><div class="serif" style="font-size:30px">Hii</div><div class="rb serif big" style="font-style:italic;word-break:break-word">${esc(st.name)}</div><p style="font-size:19px;font-weight:700;margin:12px 0 0">Which class are you in?</p><p style="color:var(--mut);margin:6px 0 0">Pick one and we'll set up your books.</p>
+<div class="chips">${[6,7,8,9,10,11,12].map(c=>`<button class="chip" data-c="${c}"><small>Class</small><br><b style="font-size:22px">${c}</b></button>`).join('')}</div><button class="btn" id="go" disabled>Start learning</button><div class="foot serif">love reading</div></div>`;
+ document.querySelectorAll('.chip').forEach(c=>c.onclick=()=>{sel=c.dataset.c;document.querySelectorAll('.chip').forEach(x=>x.classList.toggle('on',x===c));$('#go').disabled=false});let sel='';
+ $('#go').onclick=()=>{st.cls='Class '+sel;S.set('cls',st.cls);route()}}
+const esc=s=>s.replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+function shell(){app.innerHTML=`<div id="view"></div><div class="nav">${[['home','Home'],['explore','Explore'],['game','Game Zone'],['book','My Books']].map(([k,l])=>`<button class="tab" data-t="${k}">${ic(k)}${l}</button>`).join('')}</div>`;
+ document.querySelectorAll('.tab').forEach(t=>t.onclick=()=>{st.tab=t.dataset.t;view()});view()}
+function view(){clearInterval(timer);document.querySelectorAll('.tab').forEach(t=>t.classList.toggle('on',t.dataset.t===st.tab));
+ const v=$('#view'),n=esc(st.name),cn=parseInt(st.cls.replace(/\D/g,''))||11;let h='';const row=l=>`<div class="hs">${l.map(card).join('')}</div>`;
+ if(st.tab==='home'){const sl=[["Hello, "+n,"What's up today? Explore more."],["Welcome back, "+n,"Your books are waiting."],[n+", ready to learn?","Pick up where you left off."],["Good to see you, "+n,"One chapter a day goes far."],["Keep going, "+n,"Small steps, big marks."],[n+", you've got this","Today is a great day to read."],["Let's revise, "+n,"Save books to find them fast."],["Hey "+n,"250+ NCERT books, classes 6 to 12."],["Smart move, "+n,"Read first, then test yourself."],["Proud of you, "+n,"Consistency beats cramming."]];
+  h=`<div class="page"><div class="top"><h2 class="serif" style="font-weight:400;font-size:28px">Study &amp; fun</h2><div class="row"><button class="ib" data-a="sub">${ic('crown')}</button><button class="ib" data-a="note">${ic('bell')}</button><button class="ib" data-a="set">${ic('set')}</button></div></div>
+  <div class="hero">${sl.map((x,i)=>`<div class="slide ${i?'':'on'}"><div class="mini" style="background:${BOOKS[i*25].c}"></div><h3 class="serif">${x[0]}</h3><p>${x[1]}</p></div>`).join('')}<div class="dots">${sl.map((_,i)=>`<i class="${i?'':'on'}"></i>`).join('')}</div></div>
+  <h4>Books for ${st.cls}</h4>${row(BOOKS.filter(b=>b.k===cn&&b.m==='E'))}<h4>Hindi medium</h4>${row(BOOKS.filter(b=>b.k===cn&&b.m==='H'))}<h4>Popular this week</h4>${row(BOOKS.filter((b,i)=>i%9===0))}</div>`}
+ else if(st.tab==='explore')h=`<div class="page"><div class="top"><h2>Explore</h2></div><div class="search">${ic('search').replace('<svg','<svg style="width:20px;height:20px;stroke:var(--mut)"')}<input id="q" placeholder="Search by book title, subject or class"></div><div class="hs" style="margin:12px 0">${['All',6,7,8,9,10,11,12].map(c=>`<button class="fc ${st.f==c?'on':''}" data-f="${c}">${c==='All'?'All':'Class '+c}</button>`).join('')}</div><p class="sub" id="cnt"></p><div class="grid" id="res"></div></div>`;
+ else if(st.tab==='game')h=`<div class="page"><div class="top"><h2>Game Zone</h2></div><div class="empty serif" style="font-size:26px">Games are coming soon.<p class="sub" style="font-family:Manrope;font-size:14px">Quizzes and puzzles will land here.</p></div></div>`;
+ else{const sv=saved().map(i=>BOOKS[i]),last=BOOKS[+S.get('last',-1)];h=`<div class="page"><div class="top"><h2>My Books</h2></div><h4 style="margin-top:6px">Saved books</h4>${sv.length?row(sv):'<div class="note">Nothing saved yet. Open any book and tap Save in My Books.</div>'}
+  <h4>Continue reading</h4>${last?`<div class="note" data-b="${last.id}" style="display:flex;gap:14px;align-items:center;cursor:pointer"><div style="width:54px">${cover(last)}</div><div style="flex:1"><b>${last.t}</b><small>Class ${last.k} · tap to open chapters</small></div></div>`:'<div class="note">Books you open will show up here.</div>'}
+  <h4>Highlights &amp; notes</h4><div class="note">Highlights and notes you add will appear here.<small>Coming with the PDF reader</small></div></div>`}
+ v.innerHTML=h;v.onclick=e=>{const c=e.target.closest('[data-b]');if(c)bookP(+c.dataset.b)};
+ v.querySelectorAll('[data-a]').forEach(b=>b.onclick=()=>b.dataset.a==='sub'?sub():b.dataset.a==='note'?toast('No new notifications'):settings());
+ if(st.tab==='home'){let i=0;const s=v.querySelectorAll('.slide'),d=v.querySelectorAll('.dots i');timer=setInterval(()=>{s[i].classList.remove('on');d[i].classList.remove('on');i=(i+1)%s.length;s[i].classList.add('on');d[i].classList.add('on')},2000)}
+ if(st.tab==='explore'){v.querySelectorAll('[data-f]').forEach(b=>b.onclick=()=>{st.f=b.dataset.f;view()});const r=()=>{const q=$('#q').value.toLowerCase();const l=BOOKS.filter(b=>(st.f==='All'||b.k==st.f)&&(b.t+b.e+' class '+b.k).toLowerCase().includes(q));$('#cnt').textContent=l.length+' books';$('#res').innerHTML=l.map(card).join('')||'<div class="empty" style="grid-column:1/3">No books found</div>'};$('#q').oninput=r;r()}}
+function sub2(t,body){const p=document.createElement('div');p.className='page';p.innerHTML=`<button class="back"><svg viewBox="0 0 24 24" style="width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:2.2;vertical-align:-4px"><path d="M15 5l-7 7 7 7"/></svg> Back</button><h2 class="serif" style="font-weight:400;font-size:32px;margin:6px 0 16px">${t}</h2>${body}`;app.append(p);p.querySelector('.back').onclick=()=>p.remove();return p}
+function settings(){const p=sub2('Settings',`<div class="pc"><div class="av">${esc(st.name[0].toUpperCase())}</div><div><b class="rb" style="font-size:22px">${esc(st.name)}</b><div style="color:var(--mut);font-size:14px;margin-top:2px">${st.cls}</div></div></div>
+ <button class="li list" data-p="sub" style="background:var(--ac);color:var(--on)">Go ad-free from ₹18 <span style="color:inherit;opacity:.7">›</span></button>
+ <div class="lbl">Theme</div><div class="seg">${['light','dark','auto'].map(t=>`<button data-th="${t}" class="${st.theme===t?'on':''}">${t[0].toUpperCase()+t.slice(1)}</button>`).join('')}</div>
+ <div class="lbl">App colour</div><div class="sw">${['#0a0a0a','#2563eb','#059669','#dc2626','#7c3aed','#ea580c'].map(c=>`<i data-c="${c}" class="${st.ac===c?'on':''}" style="background:${c}"></i>`).join('')}</div>
+ <div class="lbl">More</div><div class="list"><button class="li" data-p="about">About us <span>›</span></button><button class="li" data-p="ncert">NCERT licence <span>›</span></button><button class="li" data-p="help">Help <span>›</span></button></div>
+ <button class="li list" id="out" style="color:#dc2626">Change name &amp; class</button>`);
+ p.querySelectorAll('[data-th]').forEach(b=>b.onclick=()=>{st.theme=b.dataset.th;S.set('theme',st.theme);theme();p.querySelectorAll('[data-th]').forEach(x=>x.classList.toggle('on',x===b))});
+ p.querySelectorAll('[data-c]').forEach(b=>b.onclick=()=>{st.ac=b.dataset.c;S.set('ac',st.ac);theme();p.querySelectorAll('[data-c]').forEach(x=>x.classList.toggle('on',x===b))});
+ p.querySelectorAll('[data-p]').forEach(b=>b.onclick=()=>({about,ncert,help,sub})[b.dataset.p]());
+ p.querySelector('#out').onclick=()=>{['name','cls'].forEach(k=>{try{localStorage.removeItem(k)}catch(e){}});st.name='';st.cls='';route()}}
+const para=a=>a.map(p=>`<p>${p}</p>`).join('');
+function about(){sub2('About us',`<div class="txt">${para(["Study &amp; fun is a simple, distraction-free reading app built for school students. It brings textbooks, notes and revision tools together in one clean place, so you can open a chapter and start learning in seconds.","We started with Commerce subjects such as Accountancy, Business Studies and Economics, in both English and Hindi medium. Every book is split into chapters you can read instantly, save for later, highlight and annotate.","Our design follows one idea: the book is the hero. No clutter, no noise, just clear type, generous spacing and a calm layout that works in light and dark mode.","We keep the core reading experience free. An optional subscription removes ads and supports the people who maintain the app. Your name, class and notes are stored on your own device.","Have an idea or found a bug? Open Help and send us a message. Happy learning!"])}</div>`)}
+function ncert(){sub2('NCERT licence',`<div class="txt">${para(["The National Council of Educational Research and Training (NCERT) is an autonomous body of the Government of India that prepares textbooks for school education across the country.","NCERT textbooks are made available for free for study and educational use. Students, teachers and parents are welcome to read, download and share them for learning.","NCERT states that its material may be used for non-commercial educational purposes, and that its copyright remains with NCERT. Please check the current NCERT publication and copyright policy at ncert.nic.in before any commercial reuse.","Study &amp; fun is an independent app. It is not owned by or officially affiliated with NCERT. Any subscription in this app pays for app features such as removing ads, not for NCERT content itself."])}</div>`)}
+function help(){const q=[["What is this app?","A clean reader for NCERT and core school books."],["How do I find a book?","Open Explore and type a title, subject or author."],["How do I change my class?","Settings › Change name & class."],["Can I use it in dark mode?","Yes. Settings › Theme › Dark or Auto."],["How do I save a book?","Tap a book, then use the save option."],["Where are my notes?","In My Books, under Highlights & notes."],["Are books free?","Yes. Subscription only removes ads."],["Is my data safe?","Your name and class stay on this device."],["How do I remove ads?","Settings › Subscription › choose a plan."],["How do I contact support?","Use Support in the app menu or email us."]];
+ sub2('Help',`<div class="list">${q.map(x=>`<div class="q"><b>${x[0]}</b><div>${x[1]}</div></div>`).join('')}</div>`);document.querySelectorAll('.q b').forEach(b=>b.onclick=()=>b.parentNode.classList.toggle('on'))}
+function sub(){sub2('Go ad-free',`<div class="plan"><h5>Ad-free · Monthly</h5><div class="pr">₹18<small style="font:600 14px Manrope;color:var(--mut)"> / month</small></div><ul><li>No ads while reading</li><li>Cancel anytime</li></ul><button class="btn" style="max-width:none" onclick="toast('Payments are not connected in this trial')">Choose ₹18</button></div>
+ <div class="plan best"><h5>Ad-free · Yearly</h5><div class="pr">₹49<small style="font:600 14px Manrope;color:var(--mut)"> / year</small></div><ul><li>No ads while reading</li><li>Best value</li></ul><button class="btn" style="max-width:none" onclick="toast('Payments are not connected in this trial')">Choose ₹49</button></div>`)}
+route();
+</script></body></html>
