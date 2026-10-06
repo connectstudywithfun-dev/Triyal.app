@@ -1,4 +1,4 @@
-const CACHE = 'study-fun-v2';
+const CACHE = 'study-fun-v4';
 const SHELL = ['./', 'index.html', 'manifest.webmanifest', 'logo.jpg'];
 
 self.addEventListener('install', e => {
